@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventListener Example</title>
+</head>
+<body>
+
+    <button id="button1">Handler 1</button>
+    <button id="button2">Handler 2</button>
+
+    <script>
+        const a = 5;
+        const b = 10;
+
+        // First handler: Executes console.log('hello') directly
+        const handler1 = () => console.log('hello');
+        
+        // Second handler: Returns a function that executes console.log('hello')
+        const handler2 = () => () => console.log('hello');
+
+        // Add event listeners to the buttons
+        document.querySelector('#button1').addEventListener('click', handler1);
+        document.querySelector('#button2').addEventListener('click', handler2);
+    </script>
+
+</body>
+</html>
