@@ -60,9 +60,19 @@ class doubleLinkList {
 
 let first = new Node("14");
 
+let second = new Node("15")
 
-first.next = new Node("15");
+let third = new Node("16")
 
-first.pop();
+const dll1 = new doubleLinkList();
 
-console.log(first);
+dll1.push(first);
+dll1.push(second);
+dll1.push(third);
+
+console.log(dll1)
+
+dll1.pop();
+console.log("pop------------------------")
+console.log(dll1)
+
