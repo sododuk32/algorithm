@@ -195,7 +195,7 @@ class SLL2 {
         if (index < 0 || index >= this.length) {
             return undefined; 
         }
-        if(index-1 ===this.length)
+        if(index === this.length - 1)
         {
             
            return this.pop();
@@ -206,8 +206,8 @@ class SLL2 {
         }
         if(index>=2)
         {
-            let prev = get(index-1)
-            let nextNode = get(index);
+            let prev = this.get(index-1)
+            let nextNode = this.get(index);
 
             prev.next = nextNode.next;
             nextNode.next = null;
