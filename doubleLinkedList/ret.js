@@ -119,12 +119,12 @@ dll1.push(third);
 dll1.printList();  // 순차적으로 노드를 출력
 
 dll1.pop();
-dll1.printList();  // pop 후 출력
+dll1.printList(); 
 
 
 dll1.unshift("13");
-dll1.printList();  // unshift 후 출력
+dll1.printList(); 
 
 dll1.shift();
-dll1.printList();  // shift 후 출력
+dll1.printList();  
 
