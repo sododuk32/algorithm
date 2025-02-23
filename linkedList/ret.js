@@ -1,4 +1,4 @@
-class Node {
+export class Node {
     constructor(val)
     {
         this.val = val;
@@ -8,7 +8,7 @@ class Node {
 
 }
 
-class SLL2 {
+export class SLL2 {
 
     constructor(val)
     {
