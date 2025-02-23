@@ -15,8 +15,8 @@ class doubleLinkList {
         this.length = 0;
 
     }
-    push(Newnode){
-    
+    push(value){
+        const Newnode = new Node(value); 
 
         if(this.length === 0)
         {
@@ -101,7 +101,7 @@ class doubleLinkList {
         }
         let counter = 0;
         let currentsNode;
-        if(index > this.length/2)
+        if(index > this.length / 2)
         {
             currentsNode = this.tail;
             counter = this.length - 1;
@@ -116,7 +116,7 @@ class doubleLinkList {
             currentsNode = this.head;
             while(counter !== index)
             {
-                currentsNode= currentsNode.next;
+                currentsNode = currentsNode.next;
                 counter++;
             }
         }
@@ -191,7 +191,37 @@ class doubleLinkList {
         this.length--;
         return curNode; // 삭제된 노드 반환
     }
-
+    reverse(){
+        if(this.length < 2)
+        {
+            return this.head;
+            
+        }
+        let tails= this.tail;
+        let heads = this.head;
+        
+        this.head = tails;
+        this.tail = heads;
+        
+        let prev = null;
+        let currents = heads;
+        let next = null;
+        while(currents)
+        {
+            
+            next = currents.next;
+            
+            currents.next = prev;
+            currents.prev = next;
+            
+            prev = currents;
+            currents = next;
+            
+        } 
+        
+        console.log(this)
+        return this;
+    }
     printList() {
         let current = this.head;
         let result = [];
@@ -203,9 +233,9 @@ class doubleLinkList {
     }
 
 }
-let first = new Node("14");
-let second = new Node("15");
-let third = new Node("16");
+let first = ("14");
+let second = ("15");
+let third = ("16");
 
 const dll1 = new doubleLinkList();
 
@@ -214,14 +244,30 @@ dll1.push(second);
 dll1.push(third);
 
 dll1.printList();  // 순차적으로 노드를 출력
+console.log("------------ reverse---------")
+dll1.reverse(); // double linked list reverse;
+console.log(dll1.length); // 3
+console.log(dll1.head.val); // 16
+console.log(dll1.head.next.val); //  15
+console.log(dll1.head.next.next.val); // 14
+console.log(dll1.head.next.next.next); // null
 
-dll1.pop();
-dll1.printList(); 
+
+// dll1.pop();
+// dll1.printList(); 
 
 
-dll1.unshift("13");
-dll1.printList(); 
+// dll1.unshift("13");
+// dll1.printList(); 
 
-dll1.shift();
-dll1.printList();  
+// dll1.shift();
+// dll1.printList();  
 
+// var doublyLinkedList = new doubleLinkList();
+ 
+// doublyLinkedList.push(5).push(10).push(15).push(20);
+// doublyLinkedList.get(0).val // 5
+// doublyLinkedList.get(1).val // 10
+// doublyLinkedList.get(2).val // 15
+// doublyLinkedList.get(3).val // 20
+// doublyLinkedList.get(4) // null

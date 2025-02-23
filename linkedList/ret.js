@@ -190,32 +190,31 @@ class SLL2 {
         // this.length++;
     }
 
-    remove(index)
-    {
-        if (index < 0 || index >= this.length) {
-            return undefined; 
-        }
-        if(index === this.length - 1)
+    remove(index){
+        
+        if(index < 0 || index >=this.length)
         {
-            
-           return this.pop();
+            return undefined
         }
-        if(index===0)
+        if(index === 0)
         {
             return this.shift();
         }
-        if(index>=2)
+        if(index === this.length-1)
         {
-            let prev = this.get(index-1)
-            let nextNode = this.get(index);
-
-            prev.next = nextNode.next;
-            nextNode.next = null;
-
-            this.length--
-            return nextNode;
+            return this.pop();
         }
-
+        
+        let curNode = this.get(index);
+        
+        curNode.prev.next = curNode.next;
+        curNode.next.prev = curNode.prev;
+        
+        curNode.next = null;
+        curNode.prev = null;
+        this.length--;
+        return curNode;
+        
     }
     reverse()
     {
