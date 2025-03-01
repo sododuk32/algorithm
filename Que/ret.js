@@ -1,4 +1,4 @@
-class Queue {
+export class Queue {
 constructor(){
     this.first = null;
     this.last = null;
@@ -6,7 +6,7 @@ constructor(){
     }
 
     enqueue(value){
-        let nodes = new Node(value);
+        let nodes = new QueueNode(value);
 
         if(!this.first) {
             this.first = nodes;
@@ -33,7 +33,7 @@ constructor(){
 
 }
 
-class Node{
+export class QueueNode{
 constructor(value)
 {
     this.value = value;
