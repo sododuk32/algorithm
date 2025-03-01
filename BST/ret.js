@@ -1,8 +1,12 @@
+import { Queue } from "../Que/ret.js";
+
+
 class BSTree {
 
     constructor() { 
 
         this.root = null;
+     
 
     }
     insert(nodes) {
@@ -100,6 +104,52 @@ class BSTree {
     //             }
     //         }
     // }
+    BFS(targets){
+      let searchQue = new Queue();
+      let visitedList = [];
+
+      if(!this.root)
+      {
+        console.log("threr is no root value")
+        return this
+      }
+      searchQue.enqueue(this.root) 
+
+      // base condition 으로 array.length 도 가능
+      while(Math.floor(searchQue.size) > 0)
+      {
+        
+        let currentNode = searchQue.dequeue();  
+        let currentValue = currentNode.value;  
+        
+        if(!currentValue) {
+          console.log("can't push without value in visitedList")
+          return this
+        }
+        visitedList.push(currentValue);
+
+          if(currentValue !== targets ){
+// 모든 노드 순회임으로 동적 프로그래밍 사용해도됨. 근대 여긴 노드 2개라 left right 만 체크 
+            
+            if(currentNode.left){
+            searchQue.enqueue(currentNode.left)  
+            }
+            if(currentNode.right) {
+              searchQue.enqueue(currentNode.right)
+            }
+            
+          }
+          else { 
+          console.log("found target");
+          console.log(currentNode)
+          return currentValue;
+          }
+      }
+      return visitedList;
+
+    }
+
+
 }
 
 class Node { 
@@ -142,3 +192,7 @@ Btree.find("5000");
 console.log("------------------------")
 console.log("looking for theses " + rnum)
 console.log(Btree.find(rnum))
+
+console.log("------------------------")
+
+Btree.BFS("5000")
