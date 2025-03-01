@@ -43,6 +43,7 @@ class BSTree {
                     }
                     middle = middle.right
                 }
+                // value 가 동일한 case 
                 else {
                     console.log("is not unique value")
                     return this;

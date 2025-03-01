@@ -19,6 +19,10 @@ function caseNumber(array,input)
     let left = 0;
     let right = lengA -1 ;
 
+
+// left 와 right 를 기준으로 mid를 재 계산하는 재귀가 이 로직 코드를 짜는곳에서 가장 햇갈리는부분임. 
+// 분할비교를 한다는 개념 자체는 오히려 이해하기 쉬움. 
+// 재귀 개념이 모자란건진 몰라도 재귀 base condition ,  left , right 값 재설정이 가장힘들었음. 
     while(left <= right )
     {
         let mid = Math.floor((right+left) / 2)
@@ -33,6 +37,8 @@ function caseNumber(array,input)
         }
         else if (input ===  array[mid]) {
             return array[mid]
+        }else {
+            console.log("throw error left over right")
         }
     }
 
