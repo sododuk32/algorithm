@@ -120,16 +120,16 @@ class BSTree {
       {
         
         let currentNode = searchQue.dequeue();  
+
+        if (!currentNode) continue;
+
+
         let currentValue = currentNode.value;  
-        
-        if(!currentValue) {
-          console.log("can't push without value in visitedList")
-          return this
-        }
         visitedList.push(currentValue);
 
+ 
           if(currentValue !== targets ){
-// 모든 노드 순회임으로 동적 프로그래밍 사용해도됨. 근대 여긴 노드 2개라 left right 만 체크 
+          // 모든 노드 순회임으로 동적 프로그래밍 사용해도됨. 근대 여긴 노드 2개라 left right 만 체크 
             
             if(currentNode.left){
             searchQue.enqueue(currentNode.left)  
