@@ -63,7 +63,6 @@ class MaxBinaryHeap {
             this.values[parentsIdx] = this.values[idx];
             this.values[idx] = temp;
             idx = parentsIdx;
-
         }
     }
 }
