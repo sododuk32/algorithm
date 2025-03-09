@@ -190,7 +190,7 @@ class BSTree {
 
 }
 
-class Node { 
+export  class BinaryNode { 
 
     constructor(values){
         
@@ -208,29 +208,36 @@ function getRandomInt(min, max) {
   
 
 
-const Btree = new BSTree();
+  export function BSTInit() 
+  {
+    const Btree = new BSTree();
 
 
-const rootNode = new Node("5000")
-const rnum = new Node(getRandomInt(0,10000)).value;
+    const rootNode = new BinaryNode("5000")
+    const rnum = new BinaryNode(getRandomInt(0,10000)).value;
+    
+    Btree.root = rootNode;
+    Btree.insert( new BinaryNode(getRandomInt(0,10000)))
+    Btree.insert(new BinaryNode(getRandomInt(0,10000)))
+    Btree.insert(new BinaryNode(getRandomInt(0,10000)))
+    Btree.insert(new BinaryNode(rnum))
+    
+    
+    console.log(JSON.stringify(Btree.root, null, 2));
+    
+    console.log(Btree) 
+    
+    Btree.find("5000");
+    
+    console.log("------------------------")
+    console.log("looking for theses " + rnum)
+    console.log(Btree.find(rnum))
+    
+    console.log("------------------------")
+    
+    Btree.BFS("5000")
 
-Btree.root = rootNode;
-Btree.insert( new Node(getRandomInt(0,10000)))
-Btree.insert(new Node(getRandomInt(0,10000)))
-Btree.insert(new Node(getRandomInt(0,10000)))
-Btree.insert(new Node(rnum))
+  }
 
 
-console.log(JSON.stringify(Btree.root, null, 2));
-
-console.log(Btree) 
-
-Btree.find("5000");
-
-console.log("------------------------")
-console.log("looking for theses " + rnum)
-console.log(Btree.find(rnum))
-
-console.log("------------------------")
-
-Btree.BFS("5000")
+  // BSTInit();
