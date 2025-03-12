@@ -1,5 +1,15 @@
 // import { BinaryNode } from "../BST/ret.js";
 
+// 우선순위큐는 탐색목적이 아님. 그건 이진탐색 트리가 훨씬나음.
+// 힙의 한 종류가 이진힙임. 
+// 힙은 그리고 트리의 한 종류임. 
+// 2진힙은 다른 자료 구조로 변경이 용이함. 
+// 이진힙은 최대,최소이진힙으로 나뉨 
+// 노드는 2개의 자식이고, 자식노드들은 각각 부모보다 크거나 같다는 규칙만 지키면되서
+// 밸런스있게 노드가 분배됨. 
+// 저장시 배열로 저장한다음 사용가능한게 매우 편리함. 
+// n ,logN의 복잡도라 ㄱㅊ 
+
 export class HeapNode {
 
     constructor(p=null,v=null){
@@ -23,6 +33,13 @@ this.values = [];
         this.bubbleUp();
     }
     Dequeue(){
+        const min = this.values[0];
+        const ends = this.values.pop();
+        this.values[0] = ends;
+        this.bubbleDown();
+
+        return ends;
+        
     }
     bubbleUp(){
         let idx = this.values.length-1;
@@ -43,6 +60,46 @@ this.values = [];
                 this.values[idx] = parentsNode;
                 idx = parentsIdx;
             }
+        }
+    }
+    bubbleDown(){
+        const first = this.values[0]; 
+        // 위치시켜야할 value ;
+        let idx = 0;
+        const lengths = this.values.length;
+
+        while(true)
+        {
+            const leftIdx =2*idx +1;
+            const rightIdx = 2*idx +2;
+            let leftVal,rightVal ;
+            let swap = null;
+
+            if(leftIdx < lengths)
+            {
+                leftVal = this.values[leftIdx].priority;
+
+                if(leftVal < this.values[idx].priority)
+                {
+                    swap = leftIdx
+                }
+
+            }
+
+            if (rightIdx < lengths) {
+                if (
+                    (swap === null && this.values[rightIdx].priority < this.values[idx].priority) ||  
+                    (swap !== null && this.values[rightIdx].priority < this.values[swap].priority) 
+                ) {
+                    swap = rightIdx;
+                }
+            }
+
+            
+            if(swap === null) break;
+
+            [this.values[idx],this.values[swap]] = [this.values[swap],this.values[idx]];
+            idx = swap;
         }
     }
 }
@@ -124,7 +181,7 @@ class MaxBinaryHeap {
         let idx = 0;
         const length = this.values.length;
         const element = this.values[0];
-        while(idx < length)
+        while(idx && idx < length)
         {
             let childLeft = 2*idx + 1;
             let childRight = 2*idx + 2;
@@ -172,7 +229,14 @@ function prio () {
     pq.Enqueue(4, "b");
     pq.Enqueue(1, "a");
     
+
+
     console.log(pq);
+    console.log("------");
+
+    pq.Dequeue();
+    console.log(pq);
+
 }
 
 
@@ -189,12 +253,12 @@ export function MaxInit(){
     // console.log("--- ")
 
     console.log(mbh.values)
-    console.log("--- ")
+    console.log(" --- ")
     console.log(mbh.extractMax() );
     console.log(mbh.values)
 
 }
 
-// prio();
+prio();
 
-MaxInit()
+// MaxInit()
