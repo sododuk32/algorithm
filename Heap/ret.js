@@ -1,4 +1,51 @@
-// import {BinaryNode} from "../BST/ret.js";
+// import { BinaryNode } from "../BST/ret.js";
+
+export class HeapNode {
+
+    constructor(p=null,v=null){
+    this.priority= p;
+    this.value= v;
+    }
+}
+
+class MinPriorityQueue {
+constructor() {
+this.values = [];
+}
+
+    initVal(value)
+    {
+    this.values = values
+    }
+    Enqueue(priority, value) {
+        const newNode = new HeapNode(priority, value);
+        this.values.push(newNode);
+        this.bubbleUp();
+    }
+    Dequeue(){
+    }
+    bubbleUp(){
+        let idx = this.values.length-1;
+        while(idx > 0)
+        {
+            console.log("while")
+            const parentsIdx = Math.floor((idx -1 )/2);
+            const parentsNode = this.values[parentsIdx];
+
+            if(parentsNode.priority <= this.values[idx].priority)
+            {
+                break;
+            }
+
+            if(parentsNode.priority > this.values[idx].priority)
+            {
+                this.values[parentsIdx] = this.values[idx];
+                this.values[idx] = parentsNode;
+                idx = parentsIdx;
+            }
+        }
+    }
+}
 
 class MaxBinaryHeap {
 
@@ -65,9 +112,68 @@ class MaxBinaryHeap {
             idx = parentsIdx;
         }
     }
+    extractMax(){
+        const max =this.values[0];
+        const end = this.values.pop();
+        this.values[0] = end;
+        this.sinkDown();
+        // heapyfi같은거임
+        return max;
+    }
+    sinkDown(){
+        let idx = 0;
+        const length = this.values.length;
+        const element = this.values[0];
+        while(idx < length)
+        {
+            let childLeft = 2*idx + 1;
+            let childRight = 2*idx + 2;
+            let childValLeft ,childValRight;
+            let swap =null;
+
+            // 더이상 자식 노드가 없으면 이 length를 벗어남.
+            // 그렇게될경우 elements는 leaf임으로 교환 작업이 이뤄지면안됨.
+            if(childLeft < length)
+            {
+                childValLeft = this.values[childLeft];
+
+                if(childValLeft >element)
+                {
+                    swap = childLeft;
+                }
+                
+            }
+            if(childRight < length)
+            {
+                childValRight = this.values[childRight];
+                if(
+                    (swap === null && childValRight > element) ||
+                    (swap !== null && childValRight > childValLeft) 
+                  )
+                    {
+                        swap = childRight;
+                    }
+            }
+            if(swap === null) break;
+            // swap이 이뤄지지않는게 base condition임. 
+            const cur =  this.values[idx];
+            this.values[idx] = this.values[swap];
+            this.values[swap] = cur;
+            idx = swap;
+
+        }
+    }
 }
 
-
+function prio () {
+    const pq = new MinPriorityQueue();
+    pq.Enqueue(5, "d");
+    pq.Enqueue(55, "c");
+    pq.Enqueue(4, "b");
+    pq.Enqueue(1, "a");
+    
+    console.log(pq);
+}
 
 
 
@@ -75,18 +181,20 @@ export function MaxInit(){
 
     const mbh = new MaxBinaryHeap();
 
-    mbh.initVal([1,2,3,4,60,70,80,90,91,100].reverse())
-    console.log("before")
-    console.log(mbh) 
-    console.log("--- ")
-    console.log("insert 5 ")
-    console.log("--- ")
+    mbh.initVal([55,39,41,18,27,12,33])
+    // console.log("before")
+    // console.log(mbh) 
+    // console.log("--- ")
+    // console.log("insert 5 ")
+    // console.log("--- ")
 
-    mbh.insert(71);
-    console.log("after")
-    console.log(mbh)
+    console.log(mbh.values)
+    console.log("--- ")
+    console.log(mbh.extractMax() );
+    console.log(mbh.values)
+
 }
 
-// MaxInit
+// prio();
 
 MaxInit()
