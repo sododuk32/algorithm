@@ -47,6 +47,22 @@ class MaxBinaryHeap {
         this.values.push(elements);
         this.bubbleUp();
     }
+
+    // 최댓값을 루트로 만들고 삭제. 
+    // 그다음 큰값을 루트로 만듬.     
+    extractMax()
+    {
+        const maxValue = this.values[0];
+        const end = this.values.pop();
+        if(this.values.length > 0)
+        {
+            this.values[0] = end;
+            this.sinkDown();
+        }
+
+
+        return maxValue;
+    }
     bubbleUp() {
 
         let idx = this.values.length -1; 
@@ -63,6 +79,45 @@ class MaxBinaryHeap {
             this.values[parentsIdx] = this.values[idx];
             this.values[idx] = temp;
             idx = parentsIdx;
+        }
+    }
+    sinkDown(){
+        let idx = 0;
+        const length = this.values.length;
+        const element = this.values[0];
+
+        while(idx > 0)
+        {
+            let leftChildIdx = 2*idx + 1;
+            let rightChildIdx = 2*idx + 2;
+            let leftChild; 
+            let rightChild;
+            let swap = null; 
+
+            if(leftChildIdx < length)
+            {
+                leftChild = this.values[leftChildIdx]
+                if(leftChild > element)
+                {
+                    swap = leftChildIdx
+                }
+            }
+            if(rightChild < length)
+            {
+                rightChild = this.values[rightChildIdx]
+                if( (swap === nuill && rightChild > element) ||
+                    (swap !== null && rightChild > leftChild) )
+                {
+                    swap = rightChildIdx
+                }
+            }
+
+            if(swap == null) break; 
+            this.values[idx] = this.values[swap];
+            this.values[swap] = element;
+
+                // 변화없으면 루프 중단
+            
         }
     }
 }
@@ -84,6 +139,19 @@ export function MaxInit(){
 
     mbh.insert(71);
     console.log("after")
+    console.log(mbh)
+
+    console.log("--- ")
+    console.log("max heap ")
+    console.log("--- ")
+
+
+    mbh.insert(72);
+    console.log("after max")
+    mbh.extractMax();
+    mbh.extractMax();
+
+
     console.log(mbh)
 }
 
