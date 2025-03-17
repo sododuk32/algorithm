@@ -72,25 +72,45 @@ class GraphList {
 
             }
     }
-
-
-
     removeVertex(vertex){
         if(this.adjacencyList[vertex])
             {
-                Object.keys(this.adjacencyList).forEach((vertex)=>{
+                Object.keys(this.adjacencyList).forEach((v)=>{
 
-                    const isTrue = this.adjacencyList[vertex].indexOf(keyName);
+                    const isTrue = this.adjacencyList[v].indexOf(vertex);
                     if(isTrue !== -1)
                         {
-                            this.adjacencyList[vertex].splice(isTrue,1);
+                            this.adjacencyList[v].splice(isTrue,1);
 
                         } 
                 })
 
-              delete this.adjacencyList[keyName];
+              delete this.adjacencyList[vertex];
 
             }
+    }
+    DepthSearch(start){
+        let results = [];
+        let visitedList = {};
+        const adjacList = this.adjacencyList;
+        function helperDfsRecursive(vtx){
+            if(!vtx)
+            {
+                return null
+            }
+            visitedList[vtx] = true;
+            results.push(vtx);
+            adjacList[vtx].forEach((node)=>{
+                if(!visitedList[node])
+                {
+                   return helperDfsRecursive(node)
+                }
+                
+            })
+        }
+
+        helperDfsRecursive(start);
+        return results;
     }
 }
 
@@ -124,15 +144,16 @@ Gra.addEdge("D", "E");
 // 그래프 상태 확인 (삭제 전)
 console.log("🟢 삭제 전 그래프:", JSON.stringify(Gra.adjacencyList, null, 2));
 
-// 정점 삭제 테스트
-Gra.removeVertex("D"); // D 제거 → B, C, E에서도 제거되어야 함
+// // 정점 삭제 테스트
+// Gra.removeVertex("D"); // D 제거 → B, C, E에서도 제거되어야 함
 
-// 결과 확인 (D가 제거되었는지 확인)
-console.log("🔴 D 제거 후 그래프:", JSON.stringify(Gra.adjacencyList, null, 2));
+// // 결과 확인 (D가 제거되었는지 확인)
+// console.log("🔴 D 제거 후 그래프:", JSON.stringify(Gra.adjacencyList, null, 2));
 
-// 추가 삭제 테스트
-Gra.removeVertex("A"); // A 제거 → B, C에서도 제거되어야 함
+// // 추가 삭제 테스트
+// Gra.removeVertex("A"); // A 제거 → B, C에서도 제거되어야 함
 
-// 최종 결과 확인
-console.log("🔵 A 제거 후 그래프:", JSON.stringify(Gra.adjacencyList, null, 2));
+// // 최종 결과 확인
+// console.log("🔵 A 제거 후 그래프:", JSON.stringify(Gra.adjacencyList, null, 2));
 
+console.log(Gra.DepthSearch("B"));
