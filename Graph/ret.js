@@ -112,6 +112,32 @@ class GraphList {
         helperDfsRecursive(start);
         return results;
     }
+    DepthSearchIterative(start){
+        const stack = [start];
+        // 방문 예정 노드 
+        const result= [];
+        const visited = {};
+        // 방문한 노드.
+        visited[start] =true;
+        let currentVertex;
+
+        while(stack.length)
+        {
+            currentVertex = stack.pop();
+            result.push(currentVertex);
+            this.adjacencyList[currentVertex].forEach((node)=>{
+                if( !visited[node])
+                {
+                    visited[node]=true;
+                    stack.push(node)
+                }
+            }) // 인접 노드 배열.
+
+        }
+        console.log(result)
+
+        return result;
+    }
 }
 
 // const Gra = new GraphList();
@@ -142,7 +168,7 @@ Gra.addEdge("C", "D");
 Gra.addEdge("D", "E");
 
 // 그래프 상태 확인 (삭제 전)
-console.log("🟢 삭제 전 그래프:", JSON.stringify(Gra.adjacencyList, null, 2));
+// console.log("🟢 삭제 전 그래프:", JSON.stringify(Gra.adjacencyList, null, 2));
 
 // // 정점 삭제 테스트
 // Gra.removeVertex("D"); // D 제거 → B, C, E에서도 제거되어야 함
@@ -157,3 +183,5 @@ console.log("🟢 삭제 전 그래프:", JSON.stringify(Gra.adjacencyList, null
 // console.log("🔵 A 제거 후 그래프:", JSON.stringify(Gra.adjacencyList, null, 2));
 
 console.log(Gra.DepthSearch("B"));
+console.log("---")
+console.log(Gra.DepthSearchIterative("B"));
