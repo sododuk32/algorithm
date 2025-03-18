@@ -138,6 +138,19 @@ class GraphList {
 
         return result;
     }
+    BreadthSearch(start)
+    {
+        let queue = [];
+        let result = [];
+        let visited = {};
+
+         queue.push(start);
+         
+        while(queue.length > 0)
+        {
+
+        }
+    }
 }
 
 // const Gra = new GraphList();
