@@ -140,16 +140,33 @@ class GraphList {
     }
     BreadthSearch(start)
     {
-        let queue = [];
-        let result = [];
-        let visited = {};
+        let queue = [start];
+        // 방문예정 노드 관리
 
-         queue.push(start);
-         
+        let result = [];
+        // 탐색순서 관리 
+
+        let visited = new Set();
+        // 이미 방문한 노드
+
+        visited.add(start)
         while(queue.length > 0)
         {
+            const poped = queue.shift();
+            result.push(poped);
+
+            this.adjacencyList[poped].forEach((node)=>{
+            
+            if(!visited.has(node))
+            {
+                visited.add(node);
+                queue.push(node);
+            }
+          })
+     
 
         }
+        return result;
     }
 }
 
@@ -195,6 +212,8 @@ Gra.addEdge("D", "E");
 // // 최종 결과 확인
 // console.log("🔵 A 제거 후 그래프:", JSON.stringify(Gra.adjacencyList, null, 2));
 
-console.log(Gra.DepthSearch("B"));
+console.log(Gra.DepthSearch("A"));
 console.log("---")
-console.log(Gra.DepthSearchIterative("B"));
+console.log(Gra.BreadthSearch("A")); 
+
+
