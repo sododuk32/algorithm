@@ -135,17 +135,35 @@ class BSTree {
       return visitedList;
 
     }
-    DFSPreOrder() {
+    /**
+     * 
+     * @returns 
+     */
+    DFSPreOrder(targets) {
       let data = [];
+      let found=null;
       function traverse(node)
       {
         // root node를 순회전 , 순회후 , 순회 중간에 순회리스트에 넣냐로
         // 순회 방향성이 달라짐. 
         // 이 3개는 각각 다른 목적을 가지고 사용될 수 있음. 
+        //  추가 연산 자리는 traverse(node.left) 의 자리에 넣고 traverse(node.left)를 마지막에 해주면됨. 
+        // data.push(node.value)
+        // node.left && traverse(node.left)
+        // node.right && traverse(node.right)
         
-        data.push(node.value)
-        node.left && traverse(node.left)
-        node.right && traverse(node.right)
+        if(!node || found) return;
+
+        data.push(node.value);
+
+        if(node.value === targets)
+        {
+          found =node;
+          return;
+        }
+        node.left && traverse(node.left);
+        node.right && traverse(node.right);
+
       }
       traverse(this.root);
       return data
