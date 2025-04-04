@@ -76,34 +76,21 @@ class BSTree {
         }
       }
       
-    // find(values) {
-    //     if(!this.root)
-    //         {
-    //             console.log("can't find any node in tree")
-    //             return undefined;
-    //         }
-    //         else {
-    //             let middle = this.root;
-    //             while(middle)
-    //             {
-    //                 if(middle.value > values)
-    //                 {
-    //                     middle = middle.left;
-    //                 }   
-    //                 else if (middle.value < values)
-    //                 {
-    //                     middle = middle.right
-    //                 }
-    //                 else {
-    //                     console.log("we found the value");
-    //     return middle;
-    //                 }
-    //                 console.log("can't find value in tree");
-    //                 return undefined;
-                  
-    //             }
-    //         }
-    // }
+
+      /**
+       * 너비 우선 탐색 : 트리에서 루트를 기준으로 모든 자식들을 탐색후 그다음 노드들의 모든 자식을 탐색. 이때 현재 노드의 기준은 searchQue에서 꺼낸 단 하나임.
+       * 
+       * targets : 탐색하고자하는 값 ,searchQue : 탐색 예정인 노드를 모아둔 que  , visitedList : 이미 방문한 노드 리스트
+       * 1. 루트를 탐색예정큐에 삽입. 
+       * 2. 탐색예정 큐의 사이즈가 0보다 크면 실행하는 while문
+       * 3. (루프내) 현재노드를 탐색예정큐의 마지막 값으로 초기화 
+       * 4. 현재노드를 target과 비교 => 동일하면 출력 , 동일하지않으면 => 하위 노드들(currentNode.left,right)을 searchQue에 추가.
+       * 5. 4를 계속해서 반복, 
+       * 6. targets가 존재하는 node를 찾았을시 해당 node출력, 방문한 list출력.
+       * 
+       * @param {*} targets 탐색하고자 하는 값.
+       * @returns 방문리스트, 찾은 노드
+       */
     BFS(targets){
       let searchQue = new Queue();
       let visitedList = [];
